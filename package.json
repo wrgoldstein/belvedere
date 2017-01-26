@@ -1,0 +1,19 @@
+{
+  "name": "observatory2",
+  "version": "1.0.0",
+  "description": "readme.md",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify src.js -o index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.4.0",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "watchify": "^3.8.0"
+  }
+}

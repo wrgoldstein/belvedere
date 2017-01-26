@@ -1,0 +1,5 @@
+node_modules
+.sass-cache
+.env
+web/public/js/*
+web/public/style/*

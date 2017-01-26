@@ -1,0 +1,32 @@
+<%= erb :header %>
+<% if funnel %>
+  <%= "<div class='flash'> You made a new funnel: <strong>#{Funnel.find(funnel).name}</strong> </div>" %>
+<% end %>
+
+<input id="input-funnels" list="funnels" placeholder="Pick a funnel" autocomplete="off">
+<datalist id="funnels"></datalist>
+<button onClick="go()"> Submit </button>
+<form action="/funnel/new">
+    <input type="submit" value="Create a new funnel"/>
+</form>
+
+<div class='canvasContainer'>
+</div>
+
+<%= erb :footer %>
+
+<script type="text/javascript">
+  function go() {
+    sd.chartFunnel($('#input-funnels').val())
+  }
+
+  autosuggest = new sd.Autosuggest({
+    selector: 'datalist#funnels',
+    source: () => "/funnels"
+  })
+
+  autosuggest.setKeyUpUpdating("#input-funnels")
+  autosuggest.updateData("#input-funnels")
+
+
+</script>
