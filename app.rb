@@ -47,7 +47,7 @@ get '/funnel/:name/data' do
   name = URI.decode(params['name'])
   funnel = Funnel.where(name: name).first
   sql = funnel.sql(params['date_range'], params['days_to_complete'])
-  data = Redshift.db.fetch(sql).all
+  data = Redshift.safe_fetch(sql).all
   funnel.prepare_data(data).to_json
 end
 

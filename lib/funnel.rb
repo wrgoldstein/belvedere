@@ -34,8 +34,8 @@ class Funnel
   end
 
   def sql(date_range, days_to_complete)
-    puts 'XXX'
-    puts date_range
+    return 'fake' if name == 'fake'
+    
     days_ago = date_range[/\d+/]
     days_to_complete = days_to_complete[/\d+/]
 
