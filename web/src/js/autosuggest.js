@@ -8,9 +8,7 @@ class Autosuggest {
   }
 
   setKeyUpUpdating(selector) {
-    console.log('key updating', selector)
     $(selector).keyup(e => {
-      console.log('key up!')
       var code = (e.keyCode || e.which);
       // do nothing if it's an arrow key or tab or enter
       if (code == 8 || code == 37 || code == 38 || code == 39 || code == 40 || code == 13) {

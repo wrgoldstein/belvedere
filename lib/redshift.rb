@@ -10,6 +10,12 @@ module Redshift
     )
   end
 
+  def self.safe_fetch(sql, tries=0)
+    db.fetch(sql)
+  rescue PG::ConnectionBad
+    db.fetch(sql) if tries == 0
+  end
+
   def self.events(project)
     db.fetch("select distinct event from #{project}_production.tracks").select_map(:event)
   end

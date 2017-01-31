@@ -5,24 +5,20 @@
 <div class='controlsContainer'>
   <form id="new-funnel" action="new" method="post">
     <div class="container">
-      <input name="name" placeholder="Name your funnel" autocomplete="off">  
-    </div>
-    <div class="container">
       <input id="projects-input" list="projects" placeholder="Choose a project" name="project" autocomplete="off">  
+      <input type="text" name="events-input" class="events-input" value="" placeholder="Add an event">
     </div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
   </form>
   <button onclick='addEvent()'> Another event </button>
-  <button onclick="$('#new-funnel').submit()"> Submit </button>
+  <button onclick="go()"> Submit </button>
 </div>
 
 <%= erb :footer %>
 
 <script type="text/javascript">
   function addEvent(){
-    console.log('adding event')
-
     var ix = $('form input.events-input').length;
     el = $(`<div class="container"></div>`)
     $(`<input type='text' value='' />`)

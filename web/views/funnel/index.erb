@@ -1,32 +1,71 @@
 <%= erb :header %>
+<h3>
+  FUNNEL
+</h1>
+
 <% if funnel %>
   <%= "<div class='flash'> You made a new funnel: <strong>#{Funnel.find(funnel).name}</strong> </div>" %>
 <% end %>
 
-<input id="input-funnels" list="funnels" placeholder="Pick a funnel" autocomplete="off">
-<datalist id="funnels"></datalist>
-<button onClick="go()"> Submit </button>
-<form action="/funnel/new">
-    <input type="submit" value="Create a new funnel"/>
-</form>
-
-<div class='canvasContainer'>
+<div class='controlsContainer'>
+  <div id="input-container">
+    <input class="entry" id="input-funnels" list="funnels" placeholder="Pick a funnel" autocomplete="off">
+    <datalist id="funnels"></datalist>
+    <div style="float: right;">
+      <a href="/funnel/new">
+        <input class="plus-btn" type="image" src="/img/plus.png" width="20px" />
+      </a>
+    </div>
+  </div>
+  <div class="spacious">
+    <label for="date-range">DATE RANGE:</label>
+    <select class="select-style" id="date-range">
+      <option>Last 7 days</option>
+      <option>Last 30 days</option>
+      <option>Last 90 days</option>
+      <option>Last 180 days</option>
+    </select>
+  </div>
+  <div class="spacious">
+    <label for="time-to-complete">TIME TO COMPLETE:</label>
+    <select class="select-style" id="time-to-complete">
+      <option>1 day</option>
+      <option>3 days</option>
+      <option>7 days</option>
+      <option>14 days</option>
+      <option>30 days</option>
+    </select>
+  </div>
+  <div class='spacious'>
+    <button class="avant-garde-button-black" onClick="go()"> SUBMIT </button>
+  </div>
+  <div class='loader hidden'></div>
 </div>
-
+<div id='canvasContainer'></div>
 <%= erb :footer %>
-
 <script type="text/javascript">
-  function go() {
-    sd.chartFunnel($('#input-funnels').val())
+
+<% if funnel %>
+  <%= %{ $("#input-funnels").val('#{Funnel.find(funnel).name}') } %>
+<% end %>
+
+function go() {
+  var funnel = $('#input-funnels').val()
+  $(".flash-red").remove()
+  if (!funnel) {
+    $("#input-container").append(`<div class="flash-red"> Please choose a funnel </div>`)
+    return
   }
+  var date_range = $('#date-range').val()
+  var time_to_complete = $('#time-to-complete').val()
+  sd.chartFunnel(funnel, date_range, time_to_complete)
+}
 
-  autosuggest = new sd.Autosuggest({
-    selector: 'datalist#funnels',
-    source: () => "/funnels"
-  })
+autosuggest = new sd.Autosuggest({
+  selector: 'datalist#funnels',
+  source: () => "/funnels"
+})
 
-  autosuggest.setKeyUpUpdating("#input-funnels")
-  autosuggest.updateData("#input-funnels")
-
-
+autosuggest.setKeyUpUpdating("#input-funnels")
+autosuggest.updateData("#input-funnels")
 </script>

@@ -33,13 +33,18 @@ class Funnel
     funnel
   end
 
-  def sql
+  def sql(date_range, days_to_complete)
+    puts 'XXX'
+    puts date_range
+    days_ago = date_range[/\d+/]
+    days_to_complete = days_to_complete[/\d+/]
+
     ctes = events.map.with_index do |event, i|
       <<-SQL
         #{event} AS
           ( select anonymous_id, received_at
             from #{project}_production.#{event}
-            where received_at > DATEADD('day', -30, CURRENT_DATE)
+            where received_at > DATEADD('day', -#{days_ago}, CURRENT_DATE)
             #{ i > 0 ? "and anonymous_id in (select anonymous_id from #{events[i -1]})" : ''}
           )
       SQL
@@ -55,7 +60,7 @@ class Funnel
             from #{event}
             inner join #{events[0]} first_event on #{event}.anonymous_id = first_event.anonymous_id
               and #{event}.received_at > first_event.received_at
-              and dateadd('day', -7, #{event}.received_at) <= first_event.received_at
+              and dateadd('day', -#{days_to_complete}, #{event}.received_at) <= first_event.received_at
             #{i > 1 ? previous : ''}
           )
       SQL
@@ -71,12 +76,7 @@ class Funnel
     "WITH #{ctes.join(',')} #{main_body.join(%(UNION ALL\n))}"
   end
 
-  def fetch
-    Redshift.db.fetch(sql).all
-  end
-
   def prepare_data(data)
-    puts data
     data = data.sort_by { |e| -e[:count] }
     labels = data.map { |e| e[:event] }
     values = data.map { |e| e[:count] }

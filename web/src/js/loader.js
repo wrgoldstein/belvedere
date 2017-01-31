@@ -1,9 +1,11 @@
 exports.start = function() {
   $("input").prop("disabled", true);
-  $("body").append('<div class="loader"></div>');
+  $(".loader").addClass("visible")
+  $(".loader").removeClass("hidden")
 }
 
 exports.end = function() {
+  $(".loader").addClass("hidden")
+  $(".loader").removeClass("visible")
   $("input").prop("disabled", false);
-  $(".loader").remove();
 }

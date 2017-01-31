@@ -1,0 +1,33 @@
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .5s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+}
+
+.loader {
+    margin-top: 12px;
+    height: 6px;
+    background: repeating-linear-gradient(-45deg, #333, #333 20px,#aaa 20px,#aaa 40px);
+    background-size: 56px 56px; /* This is unique for this background, need to find a pattern and develop a formula */
+    -webkit-animation: slide 20s infinite linear forwards;
+    -moz-animation: slide 20s infinite linear forwards;
+    animation: slide 20s infinite linear forwards;
+}
+@-webkit-keyframes slide {
+    0% { background-position: 0% 0; }
+    100% { background-position: 100% 0; }
+}
+@-moz-keyframes slide {
+    0% { background-position: 0% 0; }
+    100% { background-position: 100% 0; }
+}
+@keyframes slide {
+    0% { background-position: 0% 0; }
+    100% { background-position: 100% 0; }
+}

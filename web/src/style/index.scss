@@ -1,0 +1,65 @@
+#input-container {
+  margin-bottom: 12px;
+}
+
+.avant-garde-button-black {
+    width: 100px;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid transparent;
+    font-family: 'ITC Avant Garde Gothic W04', 'AvantGardeGothicITCW01D 731075', 'AvantGardeGothicITCW01Dm', 'Helvetica', 'sans-serif';
+    font-size: 13px;
+}
+
+.spacious + .spacious {
+  padding-top: 12px;
+}
+
+#canvasContainer {
+  float: left;
+  width: 53%;
+  margin-top: 20px;
+  margin-left: 60px;
+  padding: 5px;
+}
+
+.controlsContainer {
+  float: left;
+  width: 200px;
+  margin-top: 6px;
+  padding: 20px;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+
+  .select-style {
+      border: 1px solid #ccc;
+      width: 120px;
+      border-radius: 0px;
+      overflow: hidden;
+  }
+
+  .select-style select {
+      padding: 5px 8px;
+      width: 130%;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      background-image: none;
+      -webkit-appearance: none;
+      -webkit-border-radius: 0px;
+  }
+
+  label {
+    display: block;
+    background-color: #fff;
+    border: none;
+    font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+    font-size: 12px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+  }
+}
+

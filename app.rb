@@ -28,6 +28,11 @@ get '/funnel/new' do
   erb :'funnel/new'
 end
 
+# segment
+get '/segment/new' do
+  erb :'segment/new'
+end
+
 post '/funnel/new' do
   funnel = Funnel.create_from_params!(params)
   redirect "/funnel/index?funnel=#{funnel.id}" if funnel
@@ -41,7 +46,9 @@ end
 get '/funnel/:name/data' do
   name = URI.decode(params['name'])
   funnel = Funnel.where(name: name).first
-  funnel.prepare_data(funnel.fetch).to_json
+  sql = funnel.sql(params['date_range'], params['days_to_complete'])
+  data = Redshift.db.fetch(sql).all
+  funnel.prepare_data(data).to_json
 end
 
 get '/funnels' do
@@ -51,5 +58,4 @@ end
 get '/events/:project' do
   Event.where(project: params['project'].downcase).pluck(:event).to_json
 end
-
 
