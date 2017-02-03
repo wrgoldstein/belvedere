@@ -8,6 +8,7 @@ window.sd = {};
 var chart = require("./charting");
 
 sd.chartFunnel = chart.chartFunnel;
+sd.chartSegment = chart.chartSegment;
 
 var Autosuggest = require("./autosuggest")
 

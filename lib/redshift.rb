@@ -13,15 +13,11 @@ module Redshift
   def self.safe_fetch(sql, tries=0)
     if sql == 'fake'
       s = Struct.new('Faker', :all)
-      dat = [{:event=>"followed_artist", :count=>35394}, {:event=>"created_account", :count=>1542}]
+      dat = [{:event=>"followed_artist", :count=>35394}, {:event=>"created_account", :count=>1542}] 
       return s.new(dat) 
     end
     db.fetch(sql)
   rescue PG::ConnectionBad
     db.fetch(sql) if tries == 0
-  end
-
-  def self.events(project)
-    db.fetch("select distinct event from #{project}_production.tracks").select_map(:event)
   end
 end

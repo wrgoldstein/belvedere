@@ -1,25 +1,43 @@
 <%= erb :header %>
 <h3>
-  FUNNEL
+  SEGMENT
 </h1>
 <div class='controlsContainer'>
   <form id="new-funnel" action="new" method="post">
     <div class="container">
       <input id="projects-input" list="projects" placeholder="Choose a project" name="project" autocomplete="off">  
-      <input type="text" name="events-input" class="events-input" value="" placeholder="Add an event">
+      <input type="text" name="events-input" list="events" id="events-input-0" class="events-input" value="" placeholder="Add an event">
     </div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
   </form>
+  <div class="spacious">
+    <label>DATE RANGE:</label>
+    <select class="select-style" id="date-range">
+      <option>Last 7 Days</option>
+      <option>Last 30 Days</option>
+      <option>Last 3 Months</option>
+      <option>Last 12 Months</option>
+      <option>Last 24 Months</option>
+    </select>
+  </div>
   <button onclick='addEvent()'> Another event </button>
   <button onclick="go()"> Submit </button>
+  <div class='loader hidden'></div>
 </div>
+<div id='canvasContainer'></div>
 
 <%= erb :footer %>
 
 <script type="text/javascript">
+  function go(){
+    var events = _.map($('.events-input'), (i) => i.value).join(',')
+    var date_range = $("#date-range").val()
+    sd.chartSegment(events, date_range)
+  }
+
   function addEvent(){
-    var ix = $('form input.events-input').length;
+    var ix = $('.events-input').length;
     el = $(`<div class="container"></div>`)
     $(`<input type='text' value='' />`)
      .attr("id", `events-input-${ix}`)
@@ -41,7 +59,9 @@
     source: (p) => `/events/${p}`,
     data: ['apple', 'banana']
   })
+
   autosuggest.updateDataOnChange('input#projects-input')
+  autosuggest.setKeyUpUpdating(`#events-input-0`)
 
   // minor autosuggest for #projects-input
   new sd.Autosuggest({
