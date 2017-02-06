@@ -7,10 +7,13 @@
     <div class="container">
       <input id="projects-input" list="projects" placeholder="Choose a project" name="project" autocomplete="off">  
       <input type="text" name="events-input" list="events" id="events-input-0" class="events-input" value="" placeholder="Add an event">
+      
     </div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
+
   </form>
+  <button onclick='addEvent()'> Another event </button>
   <div class="spacious">
     <label>DATE RANGE:</label>
     <select class="select-style" id="date-range">
@@ -21,8 +24,9 @@
       <option>Last 24 Months</option>
     </select>
   </div>
-  <button onclick='addEvent()'> Another event </button>
-  <button onclick="go()"> Submit </button>
+  <div class='spacious'>
+    <button class="avant-garde-button-black" onclick="go()"> Submit </button>
+  </div>
   <div class='loader hidden'></div>
 </div>
 <div id='canvasContainer'></div>
@@ -31,9 +35,10 @@
 
 <script type="text/javascript">
   function go(){
+    var project = $('#projects-input').val()
     var events = _.map($('.events-input'), (i) => i.value).join(',')
     var date_range = $("#date-range").val()
-    sd.chartSegment(events, date_range)
+    sd.chartSegment(project, events, date_range)
   }
 
   function addEvent(){

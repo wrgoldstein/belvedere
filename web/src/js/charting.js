@@ -34,10 +34,10 @@ exports.chartFunnel = function(funnel, date_range, days_to_complete) {
     .then(() => loader.end());
 };
 
-exports.chartSegment = function(events, date_range){
+exports.chartSegment = function(project, events, date_range){
   loader.start();
   fetch(
-    `/segment/data?events=${events}&date_range=${date_range}`)
+    `/segment/data?project=${project}&events=${events}&date_range=${date_range}`)
     .then(r => r.json())
     .then(data => prepareSegmentData(data))
     .then(data => drawChart("chartCanvas", "canvasContainer", "line", data, {}))
@@ -94,8 +94,8 @@ function prepareSegmentData(data){
       pointBackgroundColor: "#fff",
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBackgroundColor: BG_COLORS[i],
+      pointHoverBorderColor: BORDER_COLORS[i],
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,

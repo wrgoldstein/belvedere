@@ -17,7 +17,7 @@ module Redshift
       return s.new(dat) 
     end
     db.fetch(sql)
-  rescue PG::ConnectionBad
+  rescue Sequel::DatabaseDisconnectError
     db.fetch(sql) if tries == 0
   end
 end
