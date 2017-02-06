@@ -23,14 +23,26 @@ var BORDER_COLORS = [
   'rgba(255, 159, 64, 1)'
 ]
 
+
+var OPTIONS = { 
+    title: { display: false },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    }
+  };
+
 exports.chartFunnel = function(funnel, date_range, days_to_complete) {
-  var options = { title: { display: false }, legend: { display: false } };
+  var additional_options = { legend: { display: false } }
   loader.start();
   fetch(
     `/funnel/${funnel}/data?days_to_complete=${days_to_complete}&date_range=${date_range}`)
     .then(r => r.json())
     .then(data => prepareFunnelData(data))
-    .then(data => drawChart("chartCanvas", "canvasContainer", "bar", data, options))
+    .then(data => drawChart("chartCanvas", "canvasContainer", "bar", data, _.merge(OPTIONS, additional_options)))
     .then(() => loader.end());
 };
 
@@ -40,7 +52,7 @@ exports.chartSegment = function(project, events, date_range){
     `/segment/data?project=${project}&events=${events}&date_range=${date_range}`)
     .then(r => r.json())
     .then(data => prepareSegmentData(data))
-    .then(data => drawChart("chartCanvas", "canvasContainer", "line", data, {}))
+    .then(data => drawChart("chartCanvas", "canvasContainer", "line", data, OPTIONS))
     .then(() => loader.end());
 }
 

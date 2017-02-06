@@ -77,7 +77,6 @@ end
 # segment
 get '/segment/data' do
   sql = Segment.sql_for_event(params['project'], params['events'], params['date_range'])
-  puts sql
   Redshift.safe_fetch(sql).all.to_json
 end
 

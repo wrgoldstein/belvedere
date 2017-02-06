@@ -1,20 +1,19 @@
 <%= erb :header %>
-<h3>
-  FUNNEL
-</h1>
 <div class='controlsContainer'>
   <form id="new-funnel" action="new" method="post">
-    <div class="container">
-      <input name="name" placeholder="Name your funnel" autocomplete="off">  
+    <div class="form-group">
+      <input class="form-control" name="name" placeholder="Name your funnel" autocomplete="off">  
     </div>
-    <div class="container">
-      <input id="projects-input" list="projects" placeholder="Choose a project" name="project" autocomplete="off">  
+    <div class="form-group">
+      <input class="form-control" id="projects-input" list="projects" placeholder="Choose a project" name="project" autocomplete="off">  
     </div>
+    <div class="form-group" id="event-form-group"></div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
   </form>
-  <button onclick='addEvent()'> Another event </button>
-  <button onclick="$('#new-funnel').submit()"> Submit </button>
+  <!-- <a href="#" class="btn btn-add btn-tiny">Add an event</a> -->
+  <button class="btn btn-add btn-tiny" onclick='addEvent()'> Another event </button>
+  <button class="avant-garde-button-black" onclick="$('#new-funnel').submit()"> Submit </button>
 </div>
 
 <%= erb :footer %>
@@ -24,17 +23,15 @@
     console.log('adding event')
 
     var ix = $('form input.events-input').length;
-    el = $(`<div class="container"></div>`)
+
     $(`<input type='text' value='' />`)
      .attr("id", `events-input-${ix}`)
      .attr("name", `events-input-${ix}`)
      .attr("list", "events")
-     .attr("class", "events-input")
+     .attr("class", "events-input form-control")
      .attr("placeholder", "Add an event")
      .attr("autocomplete", "off")
-     .appendTo(el);
-
-    el.appendTo("#new-funnel");
+     .appendTo("#event-form-group");
 
     autosuggest.setKeyUpUpdating(`#events-input-${ix}`)
   }

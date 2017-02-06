@@ -1,5 +1,6 @@
 @import 'grid';
-@import 'base';
+@import 'colors';
+@import 'buttons';
 @import 'header';
 @import 'index';
 @import 'loader';
@@ -11,8 +12,8 @@ div.flash-green {
   color: white;
 }
 
-div.flash-red {
-  background-color: #D78585;
+div.flash-purple {
+  background-color: rgba($purple, .6);
   color: white;
 }
 
@@ -20,10 +21,6 @@ input:focus {
     outline:none;
 }
 
-
-form {
-  .container {
-    margin: 10px;
-    padding: 5px;
-  }
+body {
+  margin: 0px;
 }

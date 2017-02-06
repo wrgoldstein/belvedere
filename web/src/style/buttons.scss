@@ -1,0 +1,292 @@
+// Basic (no style cf artsy.net hero)
+// Disabled (grey button; does not change on hover)
+// Primary (black with white text; hovers to purple with white text)
+// Secondary (follows basic button style)
+// Delete (follows basic style that hovers to red)
+// Add (prepends + to the button content)
+// Secondary-add (highlight background with no border, hovers to darker border)
+// basic
+@import 'colors';
+
+input[type="submit"].btn,
+input[type="submit"].btn:visited,
+.btn, .btn:visited {
+  position: relative;
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+  *zoom: 1;
+  padding: 18px 30px 15px;
+  font-size: 13px;
+  line-height: 13px;
+  margin-bottom: 0;
+  font: {
+    weight: normal;
+    family: sans-serif;
+  }
+  color: $black;
+  text-align: center;
+  vertical-align: middle;
+  background-color: $gray-lightest;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $gray-lightest;
+  text-transform:uppercase;
+  font-weight:normal;
+  outline: none;
+
+  -webkit-font-smoothing: antialiased;
+  -webkit-transition-property: box-shadow,border,color,background-color;
+  -moz-transition-property: box-shadow,border,color,background-color;
+  -ms-transition-property: box-shadow,border,color,background-color;
+  -o-transition-property: box-shadow,border,color,background-color;
+  transition-property: box-shadow,border,color,background-color;
+  -webkit-transition-duration: 0.15s;
+  -moz-transition-duration: 0.15s;
+  -ms-transition-duration: 0.15s;
+  -o-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $purple;
+    border-color: $purple;
+    color: $white;
+    text-decoration: none;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    background-color: $purple;
+    color: transparent;
+    // &:after {
+    //   content: '';
+    //   display: block;
+    //   @include spinner(25px, 6px, $white);
+    // }
+  }
+}
+
+.btn:first-child { *margin-left: 0; }
+
+
+// disabled
+
+input[type="submit"].btn.btn-disabled,
+button.btn.btn-disabled,
+a.btn.btn-disabled {
+  background-color: $gray-lightest;
+  border-color: $gray-lightest;
+  color: $gray;
+  cursor: default;
+
+  &:hover, &:visited {
+    background-color: $gray-lightest;
+    border-color: $gray-lightest;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    color: $gray;
+    &:after { display: none; }
+  }
+}
+
+
+// primary
+
+input[type="submit"].btn.btn-primary,
+button.btn.btn-primary,
+a.btn.btn-primary,
+.btn-primary:visited {
+  background-color: $black;
+  border-color: $black;
+  color: $white;
+
+  &:hover {
+    background-color: $purple;
+    border-color: $purple;
+    color: $white;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    background-color: $purple;
+    color: transparent;
+    &:after {
+      content: '';
+      display: block;
+      // @include spinner(25px, 6px, white);
+    }
+  }
+}
+
+
+// secondary
+
+input[type="submit"].btn.btn-secondary,
+button.btn.btn-secondary,
+a.btn.btn-secondary,
+.btn-secondary:visited {
+  background-color: $white;
+  border-color: $gray;
+  &:hover {
+    background-color: $white;
+    color: $purple;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    color: transparent;
+    &:after {
+      content: '';
+      display: block;
+      // @include spinner(25px, 6px, $purple);
+    }
+  }
+}
+
+
+// link
+
+input[type="submit"].btn.btn-link,
+button.btn.btn-link,
+a.btn.btn-link,
+.btn-link:visited {
+  background-color: transparent;
+  border-color: transparent;
+  text-decoration: underline;
+  &:hover {
+    background-color: transparent;
+    color: $black;
+    text-decoration: none;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    border-color: $gray-lighter;
+    color: $gray-lighter;
+    text-decoration: none;
+    &:after {
+      content: '';
+      display: block;
+      // @include spinner(25px, 6px, $purple);
+    }
+  }
+}
+
+
+// delete
+
+input[type="submit"].btn.btn-delete,
+button.btn.btn-delete,
+a.btn.btn-delete,
+.btn-delete:visited {
+  background-color: $white;
+  border-color: $gray;
+  color: $red;
+
+  &:hover {
+    background-color: $white;
+    color: $purple;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    color: transparent;
+    &:after {
+      content: '';
+      display: block;
+      // @include spinner(25px, 6px, $red);
+    }
+  }
+}
+
+
+// add
+
+input[type="submit"].btn.btn-add,
+button.btn.btn-add,
+a.btn.btn-add,
+.btn-add:visited {
+  &:before
+  {
+    content: "+ ";
+    position: relative;
+    top: -2px;
+  }
+}
+
+
+// secondary-add
+
+input[type="submit"].btn.btn-secondary-add,
+button.btn.btn-secondary-add,
+a.btn.btn-secondary-add,
+.btn-secondary-add:visited {
+  background-color: $yellow-light;
+  border-color: $yellow;
+  color: $black;
+
+  &:hover {
+    background-color: $yellow;
+    border-color: $yellow;
+  }
+
+  &[data-state='loading'],
+  &.is-loading {
+    background-color: $yellow;
+    color: transparent;
+    &:after {
+      content: '';
+      display: block;
+      // @include spinner(25px, 6px, $black);
+    }
+  }
+}
+
+
+// sizes
+input[type="submit"].btn.btn-small,
+input[type="submit"].btn.btn-small:visited,
+button.btn.btn-small, button.btn.btn-small:visited,
+a.btn.btn-small, a.btn.btn-small:visited {
+  padding: 10px 20px 8px;
+  font-size: 11px;
+  line-height: 11px;
+  border-width: 1px;
+
+  &[data-state='loading'],
+  &.is-loading {
+    &:after {
+      // @include spinner(16px, 4px);
+    }
+  }
+}
+
+input[type="submit"].btn.btn-tiny,
+input[type="submit"].btn.btn-tiny:visited,
+button.btn.btn-tiny, button.btn.btn-tiny:visited,
+a.btn.btn-tiny, a.btn.btn-tiny:visited {
+  padding: 6px 12px 5px;
+  font-size: 11px;
+  line-height: 11px;
+  border-width: 1px;
+
+  &[data-state='loading'],
+  &.is-loading {
+    &:after {
+      // @include spinner(10px, 3px);
+    }
+  }
+}
+
+input[type="submit"].btn.btn-full-width,
+input[type="submit"].btn.btn-full-width:visited,
+button.btn.btn-full-width,
+a.btn.btn-full-width {
+  width: 100%;
+  display: block;
+}

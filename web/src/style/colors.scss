@@ -1,0 +1,26 @@
+// Colors
+////////////////////////////////////////////////////////////////////////////////
+
+$gray-lightest    : #efefef;
+$gray-lighter     : #e5e5e5;
+$gray-light       : #dbdbdb;
+$gray             : #cccccc;
+$gray-dark        : #999999;
+$gray-darker      : #666666;
+$gray-darkest     : #333333;
+$purple-light     : #b179d4;
+$purple           : #6a0bc1;
+$red-light        : #f4acb2;
+$red              : #cc3333;
+$yellow-light     : #f9f8d8;
+$yellow           : #ccc8a2;
+$green-light      : #b0d766;
+$green            : #4f8200;
+$white            : #fff;
+$black            : #000;
+
+$notice-color     : $yellow-light;
+$base-border-color: $gray;
+
+.green { color: $green; }
+.red { color: $red; }

@@ -1,24 +1,16 @@
 <%= erb :header %>
-<h3>
-  FUNNEL
-</h1>
 
 <% if funnel %>
-  <%= "<div class='flash'> You made a new funnel: <strong>#{Funnel.find(funnel).name}</strong> </div>" %>
+  <%= "<div class='flash-purple'> You made a new funnel: #{Funnel.find(funnel).name} </div>" %>
 <% end %>
 
 <div class='controlsContainer'>
   <div id="input-container">
-    <input class="entry form-control" id="input-funnels" list="funnels" placeholder="Pick a funnel" autocomplete="off">
+    <input class="entry form-control" id="input-funnels" list="funnels" placeholder="Select a funnel" autocomplete="off">
     <datalist id="funnels"></datalist>
-    <div style="float: right;">
-      <a href="/funnel/new">
-        <input class="plus-btn" type="image" src="/img/plus.png" width="20px" />
-      </a>
-    </div>
   </div>
   <div class="spacious">
-    <label for="date-range">DATE RANGE:</label>
+    <label for="date-range">date range</label>
     <select class="select-style form-control" id="date-range">
       <option>Last 7 days</option>
       <option>Last 30 days</option>
@@ -27,8 +19,8 @@
     </select>
   </div>
   <div class="spacious">
-    <label for="time-to-complete">TIME TO COMPLETE:</label>
-    <select class="select-style" id="time-to-complete">
+    <label for="time-to-complete">time to complete</label>
+    <select class="select-style form-control" id="time-to-complete">
       <option>1 day</option>
       <option>3 days</option>
       <option>7 days</option>
@@ -37,7 +29,10 @@
     </select>
   </div>
   <div class='spacious'>
-    <button class="avant-garde-button-black" onClick="go()"> SUBMIT </button>
+    <button class="avant-garde-button-black" onClick="go()">show graph</button>
+    <div class='link-container'>
+      <a href="/funnel/new">Create new funnel</a> 
+    </div>
   </div>
   <div class='loader hidden'></div>
 </div>
