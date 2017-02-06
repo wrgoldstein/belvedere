@@ -14,6 +14,7 @@ var BG_COLORS = [
   'rgba(255, 159, 64, 0.2)'
 ]
 
+
 var BORDER_COLORS = [
   'rgba(255,99,132,1)',
   'rgba(54, 162, 235, 1)',

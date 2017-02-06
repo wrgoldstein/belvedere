@@ -6,12 +6,23 @@
     </div>
     <div class="form-group">
       <input type="text" name="events-input" list="events" id="events-input-0" class="events-input form-control" value="" placeholder="Event">
+      <div class="secondary-btn-container">
+        <button id="event-modal-btn-0" type="button" class="btn btn-secondary btn-tiny" onclick='open_modal(this)'>edit</button>
+        <div id="event-modal-0" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="form-group">
+              <label>Split by a property</label>
+              <input class="form-control" id="events-edit-input-split-by-property" placeholder="Split by a property">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="events-form-group" class="form-group"></div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
   </form>
-  <button class="btn btn-add btn-tiny" onclick='addEvent()'> Another event </button>
+  <button class="btn btn-add btn-tiny form-group" onclick='addEvent()'>add event</button>
   <div class="spacious form-group">
     <label>DATE RANGE:</label>
     <select class="form-control" id="date-range">
@@ -23,7 +34,7 @@
     </select>
   </div>
   <div class='spacious'>
-    <button class="avant-garde-button-black" onclick="go()">show graph</button>
+    <button class="avant-garde-button-black" onclick="show_graph()">show graph</button>
   </div>
   <div class='loader hidden'></div>
 </div>
@@ -32,11 +43,35 @@
 <%= erb :footer %>
 
 <script type="text/javascript">
-  function go(){
+  function show_graph(){
     var project = $('#projects-input').val()
     var events = _.map($('.events-input'), (i) => i.value).join(',')
     var date_range = $("#date-range").val()
     sd.chartSegment(project, events, date_range)
+  }
+
+  function modal_template(ix) {
+    $(`<div class="form-group">
+        <input type="text" name="events-input" 
+               list="events" id="events-input-${ix}" 
+               class="events-input form-control" value="" placeholder="Event">
+        <div class="secondary-btn-container">
+          <button 
+            id="event-modal-btn-${ix}" 
+            type="button" class="btn btn-secondary btn-tiny" 
+            onclick='open_modal(this)'>edit</button>
+          <div id="event-modal-${ix}" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <div class="form-group">
+                <label>Split by a property</label>
+                <input class="form-control" id="events-edit-input-split-by-property" placeholder="Split by a property">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      `)
   }
 
   function addEvent(){
@@ -72,4 +107,27 @@
     data: ['force', 'eigen', 'microgravity']
   }).updateSuggestion()
   
+
+  function open_modal(el){
+    var modal = document.getElementById('event-modal-0');
+    var btn = document.getElementById("event-modal-btn-0");
+    var span = document.getElementsByClassName("close")[0];
+
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+  }
 </script>

@@ -130,6 +130,7 @@ input[type="submit"].btn.btn-secondary,
 button.btn.btn-secondary,
 a.btn.btn-secondary,
 .btn-secondary:visited {
+  float: right;
   background-color: $white;
   border-color: $gray;
   &:hover {
