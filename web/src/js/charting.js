@@ -39,18 +39,22 @@ var OPTIONS = {
 exports.chartFunnel = function(funnel, date_range, days_to_complete) {
   var additional_options = { legend: { display: false } }
   loader.start();
-  fetch(
-    `/funnel/${funnel}/data?days_to_complete=${days_to_complete}&date_range=${date_range}`)
+  var url = `/funnel/${funnel}/data?days_to_complete=${days_to_complete}&date_range=${date_range}`
+  fetch( url, { credentials: 'same-origin' })
     .then(r => r.json())
     .then(data => prepareFunnelData(data))
     .then(data => drawChart("chartCanvas", "canvasContainer", "bar", data, _.merge(OPTIONS, additional_options)))
-    .then(() => loader.end());
+    .then(() => loader.end())
+    .catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message)
+        loader.end()
+    });
 };
 
 exports.chartSegment = function(project, events, date_range){
   loader.start();
-  fetch(
-    `/segment/data?project=${project}&events=${events}&date_range=${date_range}`)
+  var url = `/segment/data?project=${project}&events=${events}&date_range=${date_range}`
+  fetch(url, { credentials: 'same-origin' })
     .then(r => r.json())
     .then(data => prepareSegmentData(data))
     .then(data => drawChart("chartCanvas", "canvasContainer", "line", data, OPTIONS))

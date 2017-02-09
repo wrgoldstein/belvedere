@@ -15,27 +15,9 @@ Mongoid.load! 'mongoid.yml', settings.environment
 set :public_folder, 'web/public'
 set :views, 'web/views'
 
-# use Rack::Session::Cookie, :key => 'belvedere.session',
-#                            :domain => 'localhost:4567',
-#                            :path => '/',
-#                            :expire_after => 30 * 60, # In seconds
-#                            :secret => 'some secret'
-# enable :sessions
-# use Rack::Auth::Basic, "Restricted Area" do |username, password|
-#   username == 'admin' and password == 'admin'
-# end
-
-# helpers do
-#  def protected!
-#    return if authorized?
-#    halt 401, "Not authorized\n"
-#  end
-
-#  def authorized?
-#    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-#    @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == ['admin', 'admin']
-#  end
-# end
+use Rack::Auth::Basic, "Restricted Area" do |username, password|
+  username == 'admin' and password == 'admin'
+end
 
 get '/' do
   erb :index

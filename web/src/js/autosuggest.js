@@ -6,7 +6,7 @@ class Autosuggest {
 
     this.data = this.data.sort()
   }
-
+  
   setKeyUpUpdating(selector) {
     $(selector).keyup(e => {
       var code = (e.keyCode || e.which);
@@ -34,7 +34,7 @@ class Autosuggest {
   }
 
   updateData(inputSelector){
-    fetch(this.source())
+    fetch(this.source(), { credentials: 'same-origin' })
       .then(r => r.json())
       .then(r => {
         this.data = r.sort()
@@ -45,7 +45,7 @@ class Autosuggest {
   updateDataOnChange(selector, target){
     $(selector).change(e => {
       // loader.start()
-      fetch(this.source(e.target.value))
+      fetch(this.source(e.target.value), { credentials: 'same-origin' })
         .then(r => r.json())
         .then(r => {
           this.data = r.sort()
