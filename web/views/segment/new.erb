@@ -1,6 +1,6 @@
 <%= erb :header %>
 <div class='controlsContainer'>
-  <form id="new-funnel" action="new" method="post">
+  <form id="form" action="new" method="post">
     <div class="form-group">
       <input id="projects-input" class="form-control" list="projects" placeholder="Choose a project" name="project" autocomplete="off"> 
     </div>
@@ -29,26 +29,16 @@
 
 <script type="text/javascript">
   function show_graph(){
+    console.log('showing graph...')
     var project = $('#projects-input').val()
     var events = _.map($('.events-input'), (i) => i.value).join(',')
     var date_range = $("#date-range").val()
     sd.chartSegment(project, events, date_range)
   }
 
-  function event_input_template(ix) {
-    return $(`
-      <div class="form-group">
-        <input type="text" name="events-input" 
-               list="events" id="events-input-${ix}" 
-               class="events-input form-control" value="" 
-               placeholder="Event">
-      </div>
-      `)
-  }
-
   function add_event(){
     var ix = $('.events-input').length;
-    event_input_template(ix).appendTo("#new-funnel")
+    sd.templates.event_input(ix).appendTo("#form")
     autosuggest.setKeyUpUpdating(`#events-input-${ix}`)
   }
 

@@ -1,47 +1,36 @@
 <%= erb :header %>
 <div class='controlsContainer'>
-  <form id="new-funnel" action="new" method="post">
+  <form id="form" action="new" method="post">
     <div class="form-group">
       <input class="form-control" name="name" placeholder="Name your funnel" autocomplete="off">  
     </div>
     <div class="form-group">
-      <input class="form-control" id="projects-input" list="projects" placeholder="Choose a project" name="project" autocomplete="off">  
+      <input id="projects-input" class="form-control" list="projects" placeholder="Choose a project" name="project" autocomplete="off"> 
     </div>
-    <div class="form-group" id="event-form-group"></div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
   </form>
-  <!-- <a href="#" class="btn btn-add btn-tiny">Add an event</a> -->
-  <button class="btn btn-add btn-tiny" onclick='addEvent()'> Another event </button>
-  <button class="avant-garde-button-black" onclick="$('#new-funnel').submit()"> Submit </button>
+  <button class="btn btn-add btn-tiny form-group" onclick='add_event()'>add event</button>
+  <div class="form-group">
+    <button class="avant-garde-button-black" onclick="$('#form').submit()"> Submit </button>
+  </div>
 </div>
 
 <%= erb :footer %>
 
 <script type="text/javascript">
-  function addEvent(){
-    console.log('adding event')
-
-    var ix = $('form input.events-input').length;
-
-    $(`<input type='text' value='' />`)
-     .attr("id", `events-input-${ix}`)
-     .attr("name", `events-input-${ix}`)
-     .attr("list", "events")
-     .attr("class", "events-input form-control")
-     .attr("placeholder", "Add an event")
-     .attr("autocomplete", "off")
-     .appendTo("#event-form-group");
-
+  function add_event(){
+    var ix = $('.events-input').length;
+    sd.templates.event_input(ix).appendTo("#form")
     autosuggest.setKeyUpUpdating(`#events-input-${ix}`)
   }
-
   // autosuggest for #events-input
   autosuggest = new sd.Autosuggest({
     selector: 'datalist#events',
     source: (p) => `/events/${p}`,
-    data: ['apple', 'banana']
+    data: []
   })
+
   autosuggest.updateDataOnChange('input#projects-input')
 
   // minor autosuggest for #projects-input

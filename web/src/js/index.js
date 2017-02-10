@@ -3,6 +3,7 @@ var _ = require("lodash");
 window.$ = $;
 window._ = _;
 window.sd = {};
+window.sd.templates = require("./templates")
 
 
 var chart = require("./charting");

@@ -58,7 +58,11 @@ exports.chartSegment = function(project, events, date_range){
     .then(r => r.json())
     .then(data => prepareSegmentData(data))
     .then(data => drawChart("chartCanvas", "canvasContainer", "line", data, OPTIONS))
-    .then(() => loader.end());
+    .then(() => loader.end())
+    .catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message)
+        loader.end()
+    });
 }
 
 function drawChart(ctxId, containerId, type, data, options) {

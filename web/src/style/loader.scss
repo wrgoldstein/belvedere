@@ -1,3 +1,5 @@
+@import 'colors';
+
 .visible {
   visibility: visible;
   opacity: 1;
@@ -30,4 +32,20 @@
 @keyframes slide {
     0% { background-position: 0% 0; }
     100% { background-position: 100% 0; }
+}
+
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.loader2 {
+    height: 24px;
+    width: 8px;
+    margin: auto;
+    margin-top: 100px;
+    background-color: $purple;
+    -webkit-animation:spin 1.5s linear infinite;
+    -moz-animation:spin 1.5s linear infinite;
+    animation:spin 1.5s linear infinite;
 }

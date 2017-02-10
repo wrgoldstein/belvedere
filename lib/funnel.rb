@@ -24,9 +24,9 @@ class Funnel
     ctes = events.map.with_index do |event, i|
       <<-SQL
         #{event} AS
-          ( select anonymous_id, received_at
+          ( select anonymous_id, sent_at
             from #{project}_production.#{event}
-            where received_at > DATEADD('day', -#{days_ago}, CURRENT_DATE)
+            where sent_at >= DATEADD('day', -#{days_ago}, CURRENT_DATE)
             #{ i > 0 ? "and anonymous_id in (select anonymous_id from #{events[i -1]})" : ''}
           )
       SQL
@@ -34,15 +34,15 @@ class Funnel
 
     ctes += events.map.with_index do |event, i|
       previous = "inner join time_constrained_#{events[i-1]} tc0 on tc0.anonymous_id = #{event}.anonymous_id 
-                  and first_event.received_at > tc0.received_at"
+                  and first_event.sent_at <= tc0.sent_at"
       next if i == 0
       <<-SQL
         time_constrained_#{event} AS 
-          ( select #{event}.anonymous_id, #{event}.received_at
+          ( select #{event}.anonymous_id, #{event}.sent_at
             from #{event}
             inner join #{events[0]} first_event on #{event}.anonymous_id = first_event.anonymous_id
-              and #{event}.received_at > first_event.received_at
-              and dateadd('day', -#{days_to_complete}, #{event}.received_at) <= first_event.received_at
+              and #{event}.sent_at >= first_event.sent_at
+              and dateadd('day', -#{days_to_complete}, #{event}.sent_at) <= first_event.sent_at
             #{i > 1 ? previous : ''}
           )
       SQL

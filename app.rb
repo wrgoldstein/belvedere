@@ -23,19 +23,12 @@ get '/' do
   erb :index
 end
 
-# funnel
 get '/funnel/index' do
   erb :'funnel/index', locals: { funnel: params['funnel'] }
 end
 
 get '/funnel/new' do
   erb :'funnel/new'
-end
-
-post '/funnel/new' do
-  funnel = Funnel.create_from_params!(params)
-  redirect "/funnel/index?funnel=#{funnel.id}" if funnel
-  'failed'
 end
 
 get '/funnel/:name' do
@@ -49,6 +42,7 @@ get '/funnel/:name/data' do
   end
   funnel = Funnel.where(name: name).first
   sql = funnel.sql(params['date_range'], params['days_to_complete'])
+  puts sql
   Redshift.safe_fetch(sql).all.to_json
 end
 
@@ -56,7 +50,6 @@ get '/funnels' do
   Funnel.pluck(:name).to_json
 end
 
-# segment
 get '/segment/data' do
   sql = Segment.sql_for_event(params['project'], params['events'], params['date_range'])
   Redshift.safe_fetch(sql).all.to_json
@@ -71,3 +64,8 @@ get '/events/:project' do
   Event.where(project: params['project'].downcase).pluck(:event).to_json
 end
 
+post '/funnel/new' do
+  funnel = Funnel.create_from_params!(params)
+  redirect "/funnel/index?funnel=#{funnel.id}" if funnel
+  'failed'
+end
