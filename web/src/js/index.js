@@ -5,7 +5,6 @@ window._ = _;
 window.sd = {};
 window.sd.templates = require("./templates")
 
-
 var chart = require("./charting");
 
 sd.chartFunnel = chart.chartFunnel;

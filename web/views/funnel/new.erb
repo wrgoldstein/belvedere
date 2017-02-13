@@ -2,10 +2,10 @@
 <div class='controlsContainer'>
   <form id="form" action="new" method="post">
     <div class="form-group">
-      <input class="form-control" name="name" placeholder="Name your funnel" autocomplete="off">  
+      <input class="form-control" name="name" placeholder="Name your funnel" autocomplete="off">
     </div>
     <div class="form-group">
-      <input id="projects-input" class="form-control" list="projects" placeholder="Choose a project" name="project" autocomplete="off"> 
+      <input id="projects-input" class="form-control" list="projects" placeholder="Choose a project" name="project" autocomplete="off">
     </div>
     <datalist id='projects'></datalist>
     <datalist id='events'></datalist>
@@ -38,5 +38,5 @@
     selector: 'datalist#projects',
     data: ['force', 'eigen', 'microgravity']
   }).updateSuggestion()
-  
+
 </script>

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
 
+ruby '2.3.1'
+
 gem "sinatra"
 gem "mongo"
 gem "mongoid"
-gem "pg"  
+gem "pg"
 gem "sequel"
 
 group :test, :development do

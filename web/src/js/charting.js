@@ -6,7 +6,7 @@ var Chart = require("chart.js");
 var loader = require("./loader.js");
 
 var BG_COLORS = [
-  'rgba(255, 99, 132, 0.2)', 
+  'rgba(255, 99, 132, 0.2)',
   'rgba(54, 162, 235, 0.2)',
   'rgba(255, 206, 86, 0.2)',
   'rgba(75, 192, 192, 0.2)',
@@ -25,7 +25,7 @@ var BORDER_COLORS = [
 ]
 
 
-var OPTIONS = { 
+var OPTIONS = {
     title: { display: false },
     scales: {
         yAxes: [{

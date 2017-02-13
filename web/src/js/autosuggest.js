@@ -1,12 +1,12 @@
 class Autosuggest {
   constructor(opt) {
-    this.selector = opt.selector , 
+    this.selector = opt.selector ,
     this.source = opt.source ,
     this.data = opt.data || [] ,
 
     this.data = this.data.sort()
   }
-  
+
   setKeyUpUpdating(selector) {
     $(selector).keyup(e => {
       var code = (e.keyCode || e.which);
@@ -30,7 +30,7 @@ class Autosuggest {
     } else {
       arr = this.data.slice(0,5)
     }
-    arr.forEach( a =>  s.append(`<option value='${a}'>`) ) 
+    arr.forEach( a =>  s.append(`<option value='${a}'>`) )
   }
 
   updateData(inputSelector){
@@ -38,7 +38,7 @@ class Autosuggest {
       .then(r => r.json())
       .then(r => {
         this.data = r.sort()
-        this.updateSuggestion('') 
+        this.updateSuggestion('')
       })
   }
 
@@ -49,8 +49,9 @@ class Autosuggest {
         .then(r => r.json())
         .then(r => {
           this.data = r.sort()
-          this.updateSuggestion('') 
+          this.updateSuggestion('')
         })
+        .catch(() => console.log('error'))
         // .then(() => loader.end());
     })
   }
