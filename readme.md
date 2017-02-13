@@ -31,10 +31,12 @@ dotenv ruby app.rb
 # hot reloading
 
 # browserify
-npm install watchify
+npm install watchify -g
+mkdir web/public/js/
 watchify web/src/js/index.js -o web/public/js/index.js
 
 # sass
+mkdir web/public/style/
 sass --watch web/src:web/public
 
 # sinatra
