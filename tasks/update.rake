@@ -1,9 +1,15 @@
-task update: :project do |t, args|
+task :update, :project do |_t, args|
   project = args.project
-  sql = "select distinct event from #{project}_production.tracks")
+  sql = "select distinct event from #{project}_production.tracks"
   events = Redshift.db.fetch(sql).select_map(:event)
   existing_events = Event.where(project: project).pluck(:event)
   events.select! { |e| !existing_events.include? e }
   puts "inserting #{events.size} events for project..."
   events.each { |e| Event.create! project: project, event: e }
+end
+
+
+task :add_pageviews, :project do |_t, args|
+  # pageviews are treated separately in Segment, but could be part of funnels or segments
+  sql = "select distinct pagetype from util.pagetypes"
 end

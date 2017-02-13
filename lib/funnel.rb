@@ -57,4 +57,21 @@ class Funnel
 
     "WITH #{ctes.join(',')} #{main_body.join(%(UNION ALL\n))}"
   end
+
+  # private
+
+  # def sql_partial(event, i)
+  #   pagetype = /viewed_(.*)_page/.match(event).captures.first
+  #   table = pagetype.nil? ? "#{project}_production.#{event}" : "analytics.#{project.chomp('_production')}"
+    
+  #   <<-SQL
+  #     #{event} AS
+  #       ( select anonymous_id, sent_at
+  #         from #{table}
+  #         where sent_at >= DATEADD('day', -#{days_ago}, CURRENT_DATE)
+  #           #{ !pagetype.nil? ? "and pagetype = '#{pagetype}'" : ''}
+  #           #{ i > 0 ? "and anonymous_id in (select anonymous_id from #{events[i -1]})" : ''}
+  #       )
+  #   SQL
+  # end  
 end
