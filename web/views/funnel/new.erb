@@ -23,6 +23,8 @@
     var ix = $('.events-input').length;
     sd.templates.event_input(ix).appendTo("#form")
     autosuggest.setKeyUpUpdating(`#events-input-${ix}`)
+    $(`#events-input-${ix} close-thik`)
+    $(`#form-group-events-${ix} > a`).click( (el) => el.currentTarget.parentElement.remove() )
   }
   // autosuggest for #events-input
   autosuggest = new sd.Autosuggest({
@@ -38,5 +40,4 @@
     selector: 'datalist#projects',
     data: ['force', 'eigen', 'microgravity']
   }).updateSuggestion()
-
 </script>

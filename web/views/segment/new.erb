@@ -40,6 +40,8 @@
     var ix = $('.events-input').length;
     sd.templates.event_input(ix).appendTo("#form")
     autosuggest.setKeyUpUpdating(`#events-input-${ix}`)
+
+    $(`#form-group-events-${ix} > a`).click( (el) => el.currentTarget.parentElement.remove() )
   }
 
   // autosuggest for #events-input
