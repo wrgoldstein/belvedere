@@ -2,7 +2,7 @@ require 'sequel'
 
 module Redshift
   def self.db
-    @db ||= Sequel.connect(
+    @db = Sequel.connect(
       ENV['REDSHIFT_URL'],
       port: 5439,
       force_standard_strings: false,
