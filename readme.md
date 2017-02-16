@@ -43,5 +43,4 @@ sass --watch web/src:web/public
 dotenv rerun ruby app.rb
 
 ## Deploy
-
 Deployed to Heroku.
