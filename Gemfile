@@ -9,10 +9,10 @@ gem "mongoid"
 gem "pg"
 gem "sequel"
 gem "sass"
+gem 'rake'
 
 group :test, :development do
   gem 'dotenv'
   gem 'rspec'
   gem 'rerun'
-  gem 'rake'
 end
