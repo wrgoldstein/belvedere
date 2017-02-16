@@ -4,11 +4,12 @@
   "description": "readme.md",
   "main": "index.js",
   "scripts": {
-    "postinstall": "sass --update web/src:web/public & node_modules/browserify/bin/cmd.js web/src/js/index.js -o web/public/js/index.js"
+    "postinstall": "sass --update web/src:web/public && browserify web/src/js/index.js -o web/public/js/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "browserify": "^14.1.0",
     "chart.js": "^2.4.0",
     "d3-time": "^1.0.4",
     "d3-time-format": "^2.0.3",
