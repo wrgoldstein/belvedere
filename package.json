@@ -4,7 +4,7 @@
   "description": "readme.md",
   "main": "index.js",
   "scripts": {
-    "build": "browserify src.js -o index.js"
+    "postinstall": "sass --update web/src:web/public & browserify web/src/js/index.js -o web/public/js/index.js"
   },
   "author": "",
   "license": "ISC",
