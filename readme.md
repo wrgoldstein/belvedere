@@ -44,8 +44,4 @@ dotenv rerun ruby app.rb
 
 ## Deploy
 
-Deployed to Heroku, with the following additional buildpack:
-
-```
-heroku buildpacks:add --index 2 heroku/nodejs
-```
+Deployed to Heroku.
