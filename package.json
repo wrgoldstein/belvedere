@@ -4,7 +4,8 @@
   "description": "readme.md",
   "main": "index.js",
   "scripts": {
-    "postinstall": "scripts/postinstall.sh"
+    "postinstall": "scripts/postinstall.sh",
+    "start": "echo 'noop'"
   },
   "author": "",
   "license": "ISC",
