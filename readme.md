@@ -42,6 +42,10 @@ sass --watch web/src:web/public
 # sinatra
 dotenv rerun ruby app.rb
 
-## TODO
+## Deploy
 
-So much.
+Deployed to Heroku, with the following additional buildpack:
+
+```
+heroku buildpacks:add --index 2 heroku/nodejs
+```
