@@ -8,11 +8,11 @@ gem "mongo"
 gem "mongoid"
 gem "pg"
 gem "sequel"
+gem "sass"
 
 group :test, :development do
   gem 'dotenv'
   gem 'rspec'
   gem 'rerun'
   gem 'rake'
-  gem "sass"
 end
