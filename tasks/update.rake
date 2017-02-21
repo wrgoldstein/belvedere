@@ -18,7 +18,3 @@ task :add_pageviews, :project do |_t, args|
   puts "inserting #{pagetypes.size} events for project..."
   pagetypes.each { |e| Event.create! project: project, event: "viewed_#{e}_page" }
 end
-
-task :sass do
-  `sass --update web/src:web/public`
-end
